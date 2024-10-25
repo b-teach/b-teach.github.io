@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Demo</title>
+    <script>
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        // Function to read cookies
+        function getCookies() {
+            return document.cookie.split(';').map(c => c.trim()).join('\n');
+        }
+
+        // Set a cookie when the page loads
+        window.onload = () => {
+            setCookie("userVisit", "true", 7); // Cookie expires in 7 days
+            document.getElementById("cookies").textContent = getCookies();
+        };
+    </script>
+</head>
+<body>
+    <h1>Cookie Tracking Demo</h1>
+    <p>This page sets a cookie to remember your visit for 7 days.</p>
+
+    <h3>Current Cookies:</h3>
+    <pre id="cookies">(No cookies yet)</pre>
+</body>
+</html>
